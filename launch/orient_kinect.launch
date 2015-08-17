@@ -1,0 +1,12 @@
+<?xml version = "1.0" ?>
+<launch>
+	<include file = "$(find kinect_pose_control)/launch/ar_publisher.launch" />
+
+	<!-- Orients the robot to the ar-code -->
+	<node type = "ar_transform_preserver" name = "ar_transform_preserver" pkg = "kinect_pose_control" launch-prefix = "xterm -e" >
+		<param name="kinect_frame"></param>
+		<param name="ar_code_frame"></param>
+	</node>
+	<node type = "static_transform_publisher" name = "camera_static_transform_publisher" pkg = "tf" args = "0 0 0 0 0 0 1 /dummy /world 10" launch-prefix = "xterm -e"/>
+	<node type = "static_transform_publisher" name = "adept_static_transform_publisher" pkg = "tf" args = "-0.588 0.217 0.045 0 0 0 1 /world /adept_combined 10" launch-prefix = "xterm -e"/>
+</launch>

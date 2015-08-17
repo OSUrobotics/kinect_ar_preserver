@@ -1,0 +1,20 @@
+The ar_transform_preserver.cpp file in the src/ directory contains accurate notes about the parameters provided to the node when run. 
+
+## Overview:
+Essentially, the node will continuously publish a prerecorded transform until it is asked to recalibrate. At this point, it quits publishing and listens for the same transform from another source.
+
+It is up to the user to manage the external calibration procedure that provides the initial calibration and subsequent recalibrations. ROS message/service interfaces for this may be developed (or pulled) if there is any interest.
+
+## Usage:
+We often run the node as a part of a launch file and start it in a separate x-term terminal using the roslaunch node tag's launch-prefix attribute. This looks something like:
+	<node name="ar_transform_preserver" pkg="kinect_ar_preserver" type="ar_transform_preserver">
+		<param name="kinect_frame" value="camera_depth_optical_frame"/>
+		<param name="ar_code_frame" value="ar_marker_3" />
+	</node>
+
+Anything that sets the parameters appropiately will be sufficient.
+NOTE: The parameters are private and must be declared in the proper namespace with the tilde (~), or they must be set inside of a <node> tag.
+
+## Using ar_track_alvar:
+Although their readme says nothing about it (8/15/2015), the ar_track_alvar package on which this one depends provides an executable as a part of their package that generats ar markers. To get a specific marker (identified by a particular integer id), just run the executable and fill in the parameters as necessary. 
+NOTE: The parameters you provide to the ar creator will need to be updated in the launch/ar_transformer.launch file (marker size and marker id number)
