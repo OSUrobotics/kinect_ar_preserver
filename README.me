@@ -7,7 +7,7 @@ It is up to the user to manage the external calibration procedure that provides 
 
 ## Usage:
 We often run the node as a part of a launch file and start it in a separate x-term terminal using the roslaunch node tag's launch-prefix attribute. This looks something like:
-	<node name="ar_transform_preserver" pkg="kinect_ar_preserver" type="ar_transform_preserver">
+	<node name="ar_transform_preserver" pkg="kinect_ar_preserver" type="ar_transform_preserver" launch-prefix="xterm -e" output="screen">
 		<param name="kinect_frame" value="camera_depth_optical_frame"/>
 		<param name="ar_code_frame" value="ar_marker_3" />
 	</node>
