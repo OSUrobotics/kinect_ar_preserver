@@ -16,7 +16,7 @@ void print_quat(tf::Quaternion quat, string prec)
 //Returns the file descriptor of the kinect calibration file
 int load_transform(tf::Transform& out_transform)
 {
-	string kinect_pkg_location = ros::package::getPath("kinect_pose_control");
+	string kinect_pkg_location = ros::package::getPath("kinect_ar_preserver");
 	kinect_pkg_location += "/kinect_config/";
 	
 	string kinect_config_location = kinect_pkg_location + "kinect_ar_pose.dat";
@@ -25,7 +25,7 @@ int load_transform(tf::Transform& out_transform)
 	//Since I can't get c++ file io to do my bidding, I'll use system calls
 	int kinect_pose_config_fd = open(kinect_config_location.c_str(), O_CREAT | O_RDWR, S_IRWXU | S_IRWXG);
 	if (kinect_pose_config_fd == -1){
-		ROS_ERROR_STREAM("Could not open config file in kinect_transform_publisher(). Please copy one over from kinect_pose_control/kinect_config.");
+		ROS_ERROR_STREAM("Could not open config file in kinect_transform_publisher(). Please copy one over from kinect_ar_preserver/kinect_config.");
 		exit(1);
 
 	} else {
